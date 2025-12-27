@@ -1,0 +1,8 @@
+{
+  "name": "STORES Style Portfolio",
+  "description": "A clean, modern portfolio inspired by STORES.fun, featuring AI-powered business consultation and project analysis using Gemini.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

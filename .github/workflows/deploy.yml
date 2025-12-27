@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          # キャッシュを削除することで、package-lock.json がなくても npm install が可能になります
       - name: Install dependencies
         run: npm install
       - name: Build

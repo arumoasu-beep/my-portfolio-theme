@@ -1,16 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header.tsx';
-import Hero from './components/Hero.tsx';
-import Services from './components/Services.tsx';
-import ProjectSection from './components/ProjectSection.tsx';
-import GeminiConsultant from './components/GeminiConsultant.tsx';
-import Footer from './components/Footer.tsx';
-import { TESTIMONIALS, PROJECTS } from './constants.tsx';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import Services from './components/Services';
+import ProjectSection from './components/ProjectSection';
+import GeminiConsultant from './components/GeminiConsultant';
+import Footer from './components/Footer';
+import { TESTIMONIALS, PROJECTS } from './constants';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
-  const [showBanner, setShowBanner] = useState(true);
 
   useEffect(() => {
     const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };

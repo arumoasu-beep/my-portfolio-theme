@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { analyzeBusinessIdea } from '../services/geminiService.ts';
+import { analyzeBusinessIdea } from '../services/geminiService';
 
 const GeminiConsultant: React.FC = () => {
   const [idea, setIdea] = useState('');

@@ -8,62 +8,65 @@ interface ProjectSectionProps {
 
 const ProjectSection: React.FC<ProjectSectionProps> = ({ onNavigate }) => {
   return (
-    <section id="projects" className="py-24 bg-[#F8FAFC] overflow-hidden">
+    <section id="projects" className="py-20 md:py-32 bg-stores-light">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-          <div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-20 gap-8 reveal">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
               確かな実績。
             </h2>
-            <p className="text-slate-600 max-w-md text-sm md:text-base">
-              これまでに制作したウェブサイトやアプリケーションの一部をご紹介します。
+            <p className="text-slate-500 text-base md:text-lg font-medium leading-relaxed">
+              ビジネスの成長を支援した、主要なプロジェクトの一部をご紹介します。
             </p>
           </div>
           <button 
             onClick={() => onNavigate('projects')}
-            className="text-[#0066FF] font-bold flex items-center gap-2 group text-sm md:text-base"
+            className="flex items-center gap-4 text-stores-blue font-black text-base md:text-lg group bg-white px-8 py-4 rounded-full shadow-sm hover:shadow-md transition-all"
           >
-            すべての実績を見る
-            <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            VIEW ALL WORKS
+            <svg className="w-5 h-5 md:w-6 md:h-6 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>
         </div>
 
-        {/* Horizontal Scroll on Mobile, Grid on Desktop */}
-        <div className="flex md:grid md:grid-cols-3 gap-6 md:gap-10 overflow-x-auto md:overflow-x-visible pb-12 md:pb-0 scroll-smooth snap-x snap-mandatory -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
-          {PROJECTS.map((project) => (
-            <button 
+        {/* Mobile Horizontal Scroll / Desktop Grid */}
+        <div className="flex overflow-x-auto gap-8 pb-12 -mx-6 px-6 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-10 md:pb-0 scrollbar-hide">
+          {PROJECTS.map((project, idx) => (
+            <div 
               key={project.id} 
-              onClick={() => onNavigate(`project_${project.id}`)}
-              className="flex-shrink-0 w-[280px] md:w-full bg-white rounded-[2rem] md:rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 text-left flex flex-col group snap-start"
+              className="flex-shrink-0 w-[80vw] md:w-full reveal flex flex-col group"
+              style={{ transitionDelay: `${idx * 150}ms` }}
             >
-              <div className="h-48 md:h-64 overflow-hidden relative w-full">
+              <div className="relative aspect-video md:aspect-[4/3] rounded-4xl overflow-hidden mb-6 md:mb-8 shadow-xl shadow-slate-200">
                 <img 
                   src={project.imageUrl} 
                   alt={project.title} 
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-[#0066FF] uppercase">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6">
+                  <span className="bg-white px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[9px] md:text-[10px] font-black text-stores-blue tracking-widest uppercase">
                     {project.category}
                   </span>
                 </div>
               </div>
-              <div className="p-6 md:p-8 flex-grow">
-                <h3 className="text-lg md:text-xl font-bold mb-3 text-slate-900 group-hover:text-[#0066FF] transition-colors line-clamp-1">{project.title}</h3>
-                <p className="text-slate-500 text-xs md:text-sm mb-6 leading-relaxed line-clamp-3">
+              <div className="px-2">
+                <h3 className="text-xl md:text-2xl font-black mb-2 md:mb-3 text-slate-900 group-hover:text-stores-blue transition-colors tracking-tight leading-tight">
+                  {project.title}
+                </h3>
+                <p className="text-slate-500 text-sm md:text-base font-medium leading-relaxed mb-6 line-clamp-2">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {project.tech.slice(0, 3).map((t) => (
-                    <span key={t} className="text-[9px] md:text-[10px] font-medium bg-slate-50 text-slate-500 px-2 py-1 rounded">
-                      #{t}
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <span key={t} className="text-[9px] md:text-[10px] font-bold text-slate-400 border border-slate-200 px-3 py-1 rounded-full uppercase">
+                      {t}
                     </span>
                   ))}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>

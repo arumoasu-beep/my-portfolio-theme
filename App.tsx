@@ -6,6 +6,7 @@ import Services from './components/Services';
 import ProjectSection from './components/ProjectSection';
 import GeminiConsultant from './components/GeminiConsultant';
 import Footer from './components/Footer';
+import ContentPage from './components/ContentPage';
 import { TESTIMONIALS } from './constants';
 
 function App() {
@@ -25,10 +26,19 @@ function App() {
   }, [currentPage]);
 
   const renderPage = () => {
+    // Check if it's a content page (Service, Support, or Story)
+    if (currentPage.startsWith('services_') || 
+        currentPage.startsWith('support_') || 
+        currentPage.startsWith('owner_story_') ||
+        currentPage === 'consultation_form') {
+      return <ContentPage pageKey={currentPage} onNavigate={setCurrentPage} />;
+    }
+
     switch (currentPage) {
       case 'services': return <div className="animate-fade-in"><Services /></div>;
       case 'projects': return <div className="animate-fade-in"><ProjectSection onNavigate={setCurrentPage} /></div>;
       case 'consultation': return <div className="animate-fade-in"><GeminiConsultant /></div>;
+      case 'home':
       default: return (
         <>
           <Hero onNavigate={setCurrentPage} />
@@ -45,18 +55,22 @@ function App() {
               {/* Mobile Horizontal Scroll / Desktop Grid */}
               <div className="flex overflow-x-auto gap-6 pb-12 -mx-6 px-6 md:grid md:grid-cols-3 md:gap-10 md:pb-0 scrollbar-hide reveal">
                 {TESTIMONIALS.map((item, idx) => (
-                  <div key={idx} className="flex-shrink-0 w-[85vw] md:w-full group bg-white rounded-5xl border border-slate-100 p-6 md:p-8 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500">
+                  <button 
+                    key={idx} 
+                    onClick={() => setCurrentPage(`owner_story_${idx}`)}
+                    className="flex-shrink-0 w-[85vw] md:w-full group bg-white rounded-5xl border border-slate-100 p-6 md:p-8 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500 text-left"
+                  >
                     <div className="aspect-video md:aspect-[16/10] rounded-3xl overflow-hidden mb-6 md:mb-8 shadow-sm">
                       <img src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={item.brand} />
                     </div>
-                    <p className="text-slate-900 font-bold text-base md:text-xl mb-6 md:mb-8 leading-relaxed line-clamp-3 md:line-clamp-4">
+                    <p className="text-slate-900 font-bold text-base md:text-xl mb-6 md:mb-8 leading-relaxed line-clamp-3 md:line-clamp-4 italic">
                       "{item.quote}"
                     </p>
                     <div className="flex flex-col mt-auto">
                       <span className="text-stores-blue font-black text-[10px] md:text-xs tracking-widest uppercase mb-1">{item.brand}</span>
                       <span className="text-slate-400 text-[10px] md:text-xs font-bold">{item.author}</span>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>

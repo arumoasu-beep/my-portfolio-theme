@@ -1,9 +1,21 @@
 
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+// process.env.API_KEY が存在しない場合でもエラーにならないように保護
+const getApiKey = () => {
+  try {
+    return process.env.API_KEY || '';
+  } catch (e) {
+    return '';
+  }
+};
+
+const ai = new GoogleGenAI({ apiKey: getApiKey() });
 
 export const getGeminiResponse = async (prompt: string, context: string = ""): Promise<string> => {
+  const key = getApiKey();
+  if (!key) return "APIキーが設定されていないため、AI回答を生成できません。";
+
   try {
     const response: GenerateContentResponse = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
@@ -25,6 +37,9 @@ export const getGeminiResponse = async (prompt: string, context: string = ""): P
 };
 
 export const analyzeBusinessIdea = async (idea: string): Promise<string> => {
+  const key = getApiKey();
+  if (!key) return "APIキーが設定されていません。";
+
   try {
     const response: GenerateContentResponse = await ai.models.generateContent({
       model: "gemini-3-flash-preview",

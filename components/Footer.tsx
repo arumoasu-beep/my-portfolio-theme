@@ -6,16 +6,21 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const scrollToTopAndNavigate = (page: string) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    onNavigate(page);
+  };
+
   return (
     <footer className="bg-[#0f172a] text-white pt-20 pb-10">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">
-            <button onClick={() => onNavigate('home')} className="flex items-center gap-2 mb-6 hover:opacity-80 transition-opacity">
+            <button onClick={() => scrollToTopAndNavigate('home')} className="flex items-center gap-2 mb-6 hover:opacity-80 transition-opacity">
               <div className="w-10 h-10 bg-[#0066FF] rounded-lg flex items-center justify-center font-bold text-white text-xl">U</div>
               <span className="text-2xl font-black tracking-tight">U STORE</span>
             </button>
-            <p className="text-slate-400 max-w-sm mb-8 leading-relaxed">
+            <p className="text-slate-400 max-w-sm mb-8 leading-relaxed font-medium">
               あなたのビジネスに、テクノロジーの力を。
               フロントエンド、バックエンド、AI開発まで一貫したソリューションを提供します。
             </p>
@@ -33,27 +38,27 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h4 className="text-xl font-bold mb-8">サービス</h4>
             <ul className="space-y-6 text-slate-400">
-              <li><button onClick={() => onNavigate('services_shop')} className="hover:text-white transition-colors text-left">ネットショップ制作</button></li>
-              <li><button onClick={() => onNavigate('services_system')} className="hover:text-white transition-colors text-left">システム受託開発</button></li>
-              <li><button onClick={() => onNavigate('services_ai')} className="hover:text-white transition-colors text-left">AIコンサルティング</button></li>
-              <li><button onClick={() => onNavigate('services_design')} className="hover:text-white transition-colors text-left">UI/UXデザイン</button></li>
+              <li><button onClick={() => scrollToTopAndNavigate('services_shop')} className="hover:text-white transition-colors text-left font-medium">ネットショップ制作</button></li>
+              <li><button onClick={() => scrollToTopAndNavigate('services_system')} className="hover:text-white transition-colors text-left font-medium">システム受託開発</button></li>
+              <li><button onClick={() => scrollToTopAndNavigate('services_ai')} className="hover:text-white transition-colors text-left font-medium">AIコンサルティング</button></li>
+              <li><button onClick={() => scrollToTopAndNavigate('services_design')} className="hover:text-white transition-colors text-left font-medium">UI/UXデザイン</button></li>
             </ul>
           </div>
           <div>
             <h4 className="text-xl font-bold mb-8">サポート</h4>
             <ul className="space-y-6 text-slate-400">
-              <li><button onClick={() => onNavigate('support_faq')} className="hover:text-white transition-colors text-left">よくある質問</button></li>
-              <li><button onClick={() => onNavigate('consultation_form')} className="hover:text-white transition-colors text-left">お問い合わせ</button></li>
-              <li><button onClick={() => onNavigate('support_privacy')} className="hover:text-white transition-colors text-left">プライバシーポリシー</button></li>
-              <li><button onClick={() => onNavigate('support_terms')} className="hover:text-white transition-colors text-left">利用規約</button></li>
+              <li><button onClick={() => scrollToTopAndNavigate('support_faq')} className="hover:text-white transition-colors text-left font-medium">よくある質問</button></li>
+              <li><button onClick={() => scrollToTopAndNavigate('consultation_form')} className="hover:text-white transition-colors text-left font-medium">無料相談・お問い合わせ</button></li>
+              <li><button onClick={() => scrollToTopAndNavigate('support_privacy')} className="hover:text-white transition-colors text-left font-medium">プライバシーポリシー</button></li>
+              <li><button onClick={() => scrollToTopAndNavigate('support_terms')} className="hover:text-white transition-colors text-left font-medium">利用規約</button></li>
             </ul>
           </div>
         </div>
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
           <p>© 2024 U STORE Inc. All Rights Reserved.</p>
           <div className="flex gap-6">
-            <button onClick={() => onNavigate('company')} className="cursor-pointer hover:text-white">運営会社</button>
-            <button onClick={() => onNavigate('careers')} className="cursor-pointer hover:text-white">採用情報</button>
+            <button className="cursor-pointer hover:text-white font-medium">運営会社</button>
+            <button className="cursor-pointer hover:text-white font-medium">採用情報</button>
           </div>
         </div>
       </div>

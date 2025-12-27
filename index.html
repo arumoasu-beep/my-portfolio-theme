@@ -13,6 +13,10 @@
             }
         };
     </script>
+    
+    <!-- GitHub Pagesのような静的環境で.tsxを直接動かすためのBabel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,14 +42,13 @@
         .animate-fade-in {
             animation: fadeIn 0.5s ease-out forwards;
         }
-        /* Hide scrollbar for Chrome, Safari and Opera */
+        /* Hide scrollbar */
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
-        /* Hide scrollbar for IE, Edge and Firefox */
         .scrollbar-hide {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
     <script type="importmap">
@@ -61,7 +64,10 @@
 </head>
 <body class="bg-white text-slate-900 overflow-x-hidden">
     <div id="root"></div>
-    <!-- 明示的にエントリポイントを読み込む -->
-    <script type="module" src="./index.tsx"></script>
+    <!-- 
+      GitHub Pagesで直接.tsxを動かすための設定:
+      type="text/babel" と data-type="module" を組み合わせます。
+    -->
+    <script type="text/babel" data-type="module" src="./index.tsx"></script>
 </body>
 </html>
